@@ -1,28 +1,36 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: home
 ---
 
-## Ethernet Communications: A Guide to Ethernet standards and How they Function
+# Ethernet Communications
+
+## What is Ethernet?
+
+Ethernet is a set of communications standards denoted IEEE 802.3 created by the working group of Institute of Electrical and Electronics Engineers (IEEE). It is used for a wide variety of purposes, particularly in computer networking. There have been several generations of Ethernet since the introduction of the standard in 1983, but the most relevant generation to us currently is Gigabit Ethernet, which is used in most modern computers.
 
 ### Introduction to Gigabit Ethernet
-In the realm of Ethernet communications, the Gigabit Ethernet standard, specifically the 1000BASE-T (IEEE 802.3ab), is predominantly used for the devices we rely on everyday. This standard ensures efficient and reliable data transmission across networks.
+
+Gigabit Ethernet has a few different standards that can be used for the physical layer - in general, this refers to the cable you must use and the things that connect to it. The most popular type is 1000BASE-T (IEEE 802.3ab), which is predominantly used for the devices we rely on everyday. This standard ensures efficient and reliable data transmission across networks.
 
 ### Key Specifications of 1000BASE-T
-1. **Cable Requirements**: 1000BASE-T requires the use of Category 5 (or higher) cables, supporting frequencies up to 100 MHz. These cables are made of four twisted pairs used for differential signaling, typically terminated with an 8P8C connector. This connector is often confused with the RJ45 connector.
+
+1. **Cable Requirements**: 1000BASE-T requires the use of Category 5 (or higher) cables, supporting frequencies up to 100 MHz. These cables are made of four twisted pairs used for differential signaling, typically terminated with an 8P8C connector.
 2. **Termination Schemes**: Two common termination schemes, T568A and T568B, can be used interchangeably in an installation, provided the same scheme is used at both ends (creating a "straight-through" cable). A crossover cable, necessary for certain connections, is created by using different terminations on each end.
-3. **Balanced Lines**: These lines are crucial for maintaining high Signal-to-Noise Ratio (SNR) amidst interference and crosstalk.
+3. **Balanced Lines**: These lines are crucial for maintaining high Signal-to-Noise Ratio (SNR) amidst interference and crosstalk. Since both wires in a twisted pair receive the same interference, the signals in a pair can be flipped and added together to eliminate a large amount of noise.
 4. **Port Types**: Ethernet devices feature two types of ports: MDI and MDI-X (with X denoting internal crossover). Most modern devices incorporate auto MDI-X, automatically adjusting for crossover requirements.
-5. **Data Transmission**: 1000BASE-T utilizes all four pairs for bidirectional communication, using hybrid circuits and cancellers. It employs 4D-PAM5 encoding, where "4D" signifies each wire pair as one dimension and "PAM5" stands for five-level pulse amplitude modulation.
+5. **Data Transmission**: 1000BASE-T utilizes all four pairs for bidirectional communication. It employs 4D-PAM5 encoding, where "4D" signifies each wire pair as one dimension and "PAM5" stands for five-level pulse amplitude modulation. It also uses technologies including echo cancellation and adaptive equalization to preserve a high data rate amidst noise and time-varying properties of the channel.
 
 ![Ethernet cabling Diagram](imgs/ETHCABLES.jpg)
 
+Above is a diagram of the two termination standards for Ethernet connectors, denoting which pairs of wires are connected to which pins. The diagram is from the Wikipedia page [Ethernet over twisted pair](https://en.wikipedia.org/wiki/Ethernet_over_twisted_pair).
+
 ### Understanding Ethernet Standards
+
 - **Generations of Ethernet**: Ethernet has evolved through four generations - Standard Ethernet (10 Mbps), Fast Ethernet (100 Mbps), Gigabit Ethernet (1 Gbps), and 10 Gigabit Ethernet (10 Gbps). Each generation has built upon the foundational features of its predecessors.
 - **Key Features of Standard Ethernet**: This form of Ethernet, now largely unused, was characterized by its 'connectionless' and 'unreliable' service, meaning frames were sent independently and the sender was unaware of any dropped frames.
+
 #### Fast Ethernet (100 Mbps)
+
 Fast Ethernet, offering a data rate of 100 Mbps, was designed to be compatible with the Standard Ethernet while significantly increasing the speed. It maintains the same 48-bit addressing and frame format as Standard Ethernet.
 
 - **MAC Layer Consistency**: The Media Access Control (MAC) layer remains unchanged, allowing the frame format, as well as the minimum and maximum frame sizes, to stay the same.
@@ -33,6 +41,7 @@ Fast Ethernet, offering a data rate of 100 Mbps, was designed to be compatible w
 - **Encoding Techniques**: Fast Ethernet utilized various encoding schemes. 100Base-TX used two twisted pairs with 4B/5B block coding for synchronization. 100Base-FX employed fiber-optic cables, and there was also 100Base-T4.
 
 #### Gigabit Ethernet (1 Gbps)
+
 Gigabit Ethernet was developed to maintain compatibility with both standard and fast Ethernet, keeping the same address length, frame format, and frame size.
 
 - **Duplex Modes**: The specification included both half and full-duplex modes, but modern implementations predominantly use full-duplex with switches.
@@ -41,13 +50,17 @@ Gigabit Ethernet was developed to maintain compatibility with both standard and 
 - **Encoding**: The high bandwidth requirements meant traditional Manchester encoding was unsuitable. The two-wire system used NRZ and other complex encoding systems, while the four-wire system employed 4D-PAM5.
 
 #### 10 Gigabit Ethernet
+
 10 Gigabit Ethernet, while not as widely adopted initially, represented a significant leap in data rate capabilities. It was designed to facilitate the interconnection of LANs, MANs, and WANs.
 
 - **Continuity in Frame Structure**: This standard retained the frame size and format of its predecessors.
 - **Implementation and Duplex Mode**: Most implementations used fiber-optic cables due to the difficulty in achieving such high data rates with copper. The standard operates exclusively in full-duplex mode.
 
 ### Ethernet Frame Structure
+
 ![Figure depicting standard ethernet frame](imgs/ETHFRAME.jpg)
+The above diagram is from Chapter 4 of *Data Communications and Networking with TCP/IP Protocol Suite* by Behrouz A. Forouzan.
+
 1. **Preamble and SFD**: The preamble is a 7-byte sequence of alternating 1s and 0s, signaling an incoming frame. The SFD (Start Frame Delimiter) indicates the imminent start of the frame.
 2. **Addresses**: Frames contain a 6-byte Destination Address (DA) and a 6-byte Source Address (SA), identifying the recipient and sender, respectively.
 3. **Type and Data**: The 'Type' field specifies the upper-layer protocol, while the 'Data' section carries the encapsulated data.
@@ -57,12 +70,14 @@ Gigabit Ethernet was developed to maintain compatibility with both standard and 
 ### Device Connection Methods in Ethernet Networks
 
 #### Hubs
+
 Hubs are basic networking devices that operate only at the physical layer. They are no longer widely used in modern networks due to their limitations.
 
 - **Functionality**: Hubs function as multiport repeaters in a star topology. They regenerate and broadcast incoming frames to all ports except the one they were received on, effectively broadcasting the frame to all connected devices.
 - **Limitations**: Hubs do not process link-layer addresses and cannot determine the specific destination port for a frame. All devices on the network receive the frame, but only the intended recipient processes it, while others discard it. This "dumb" approach leads to inefficiencies and security concerns.
 
 #### Link-Layer Switches
+
 Switches operate at both the physical and data-link layers, offering more intelligence and efficiency than hubs.
 
 - **Signal Regeneration**: Like hubs, switches regenerate the received signal at the physical layer to maintain signal integrity.
@@ -72,10 +87,12 @@ Switches operate at both the physical and data-link layers, offering more intell
 - **Loop Prevention**: Redundant switches are favored for reliability but can create loops. Special protocols are used to prevent looping and ensure network stability.
 
 #### Advantages of Switches over Hubs
+
 - **Collision-Free**: Switches eliminate collisions, improving the available bandwidth for each host.
 - **Versatility**: They can interconnect devices using different physical layer protocols and media types, as long as the data-link layer frame format remains the same.
 
 #### Routers
+
 Routers are more advanced devices operating across physical, data-link, and network layers. 
 
 - **Layer Operations**: Routers use link-layer and network-layer addresses for each interface, acting only on packets where the link-layer address matches the receiving interface.
@@ -84,9 +101,8 @@ Routers are more advanced devices operating across physical, data-link, and netw
 
 These connection devices play critical roles in forming and maintaining the structure and efficiency of Ethernet networks. Hubs, while simple, have given way to more sophisticated switches and routers, which provide enhanced functionality, security, and efficiency in handling network traffic.
 
+*Sources:*
 
-* Forouzan, B. A. (2022). *Data Communications and Networking with TCP/IP Protocol Suite* (6th ed.). McGraw Hill LLC.
-* [IEEE Standard for Ethernet](https://ieeexplore.ieee.org/document/9844436)
-* [Gigabit Ethernet](https://en.wikipedia.org/wiki/Gigabit_Ethernet#Copper)
-* [Autonegotiation](https://en.wikipedia.org/wiki/Autonegotiation)
-* [Ethernet over twisted pair](https://en.wikipedia.org/wiki/Ethernet_over_twisted_pair)
+- Forouzan, B. A. (2022). *Data Communications and Networking with TCP/IP Protocol Suite* (6th ed.). McGraw Hill LLC.
+- [IEEE Standard for Ethernet](https://ieeexplore.ieee.org/document/9844436)
+- [Ethernet over twisted pair](https://en.wikipedia.org/wiki/Ethernet_over_twisted_pair)
