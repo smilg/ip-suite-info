@@ -2,7 +2,7 @@
 layout: home
 ---
 
-# Ethernet Communications
+<!-- # Ethernet Communications -->
 
 ## What is Ethernet?
 
